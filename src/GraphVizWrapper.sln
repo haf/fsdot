@@ -3,6 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".paket", ".paket", "{63598DD8-3B1A-4DC3-96CE-129AE86A4618}"
+	ProjectSection(SolutionItems) = preProject
+		..\paket.dependencies = ..\paket.dependencies
+	EndProjectSection
+EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "GraphVizWrapper", "GraphVizWrapper\GraphVizWrapper.fsproj", "{BB5A2022-3217-4E37-928E-F3AC930B45B3}"
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "GraphVizWrapperTests", "GraphVizWrapperTests\GraphVizWrapperTests.fsproj", "{BB0F9B9B-BDCB-4A7B-851F-8B312980891A}"

@@ -33,20 +33,8 @@
     <DocumentationFile>bin\Release\GraphTests.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FsUnit.CustomMatchers">
-      <HintPath>..\packages\FsUnit.1.3.1.0\lib\FsUnit.CustomMatchers.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="FsUnit.NUnit">
-      <HintPath>..\packages\FsUnit.1.3.1.0\lib\FsUnit.NUnit.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="mscorlib" />
     <Reference Include="FSharp.Core, Version=$(TargetFSharpCoreVersion), Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="nunit.framework">
-      <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -56,7 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GraphTests.fs" />
-    <None Include="packages.config" />
+    <None Include="paket.references" />
     <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
@@ -89,4 +77,31 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5'">
+      <ItemGroup>
+        <Reference Include="FsUnit.CustomMatchers">
+          <HintPath>..\..\packages\FsUnit\lib\FsUnit.CustomMatchers.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+        <Reference Include="FsUnit.NUnit">
+          <HintPath>..\..\packages\FsUnit\lib\FsUnit.NUnit.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5'">
+      <ItemGroup>
+        <Reference Include="nunit.framework">
+          <HintPath>..\..\packages\NUnit\lib\nunit.framework.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
 </Project>
