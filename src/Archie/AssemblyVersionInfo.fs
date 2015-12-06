@@ -8,6 +8,6 @@ open System.Runtime.InteropServices
 [<assembly: AssemblyCopyright("(c) 2015 by John Doe")>]
 [<assembly: AssemblyVersion("0.0.0.0")>]
 [<assembly: AssemblyFileVersion("0.0.0.0")>]
-[<assembly: AssemblyInformationalVersion("0.0.0.89e740")>]
+[<assembly: AssemblyInformationalVersion("0.0.0.123eda")>]
 [<assembly: AssemblyTitle("Archie")>]
 ()
