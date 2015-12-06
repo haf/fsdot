@@ -54,8 +54,7 @@ directory 'build/pkg'
 desc 'package nugets - finds all projects and package them'
 nugets_pack :create_nugets => ['build/pkg', :versioning, :compile] do |p|
   p.configuration = Configuration
-  p.files   = FileList['src/**/*.{csproj,fsproj,nuspec}'].
-    exclude(/Tests/)
+  p.files   = FileList['src/**/*.fsproj'].exclude(/Archie|Tests/)
   p.out     = 'build/pkg'
   p.exe     = 'packages/NuGet.CommandLine/tools/NuGet.exe'
   p.with_metadata do |m|
