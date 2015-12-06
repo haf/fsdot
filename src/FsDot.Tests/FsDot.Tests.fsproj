@@ -49,7 +49,7 @@
   </Choose>
   <Import Project="$(FSharpTargetsPath)" />
   <ItemGroup>
-    <Compile Include="AssemblyVersionInfo.fs" Conditiion=" Exists('AssemblyVersionInfo.fs') " />
+    <Compile Include="AssemblyVersionInfo.fs" Condition=" Exists('AssemblyVersionInfo.fs') " />
     <Compile Include="InvocationTests.fs" />
     <None Include="paket.references" />
     <None Include="app.config" />

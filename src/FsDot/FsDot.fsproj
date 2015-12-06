@@ -39,7 +39,7 @@
     <Reference Include="System.Numerics" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AssemblyVersionInfo.fs" Conditiion=" Exists('AssemblyVersionInfo.fs') " />
+    <Compile Include="AssemblyVersionInfo.fs" Condition=" Exists('AssemblyVersionInfo.fs') " />
     <Compile Include="CommandResult.fs" />
     <Compile Include="Algo.fs" />
     <Compile Include="OutputType.fs" />

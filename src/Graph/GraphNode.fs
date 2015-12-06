@@ -60,7 +60,7 @@ module Utils =
 
 module GraphNode =
     // TODO many more shapes
-    type Shape =
+  type Shape =
     | Box
     | Polygon
     | Ellipse
@@ -115,31 +115,29 @@ module GraphNode =
     | RnaStab
     | LArrow
     | LPromotor
-        override this.ToString() =
-            (getUnionCaseName this).ToLowerInvariant()
+  with
+    override this.ToString() =
+      (getUnionCaseName this).ToLowerInvariant()
 
-    type GraphNode(id : Id) =
-        let defaultShape = Shape.Ellipse
-       
-        member __.Id = id
-        member val Shape = defaultShape with get, set
-        member private this.NodeAttributes =
-            // TODO eliminate duplication with Graph
-            let dict = Dictionary<string, string>()
-            let addIf v dv name =
-                if v <> dv then
-                    dict.[name] <- v.ToString()
-            let addIfS v name =
-                match v with
-                | Some x -> dict.[name] <- x.ToString()
-                | _ -> ()
-            let addIfB v dv name =
-                if v <> dv then
-                    dict.[name] <- v.ToString().ToLowerInvariant()
-            addIf this.Shape defaultShape "shape"
-            dict |> dictToAttrList2
+  type GraphNode(id : Id) =
+    let defaultShape = Shape.Ellipse
+    member __.Id = id
+    member val Shape = defaultShape with get, set
+    member private this.NodeAttributes =
+      // TODO eliminate duplication with Graph
+      let dict = Dictionary<string, string>()
+      let addIf v dv name =
+        if v <> dv then
+          dict.[name] <- v.ToString()
+      let addIfS v name =
+        match v with
+        | Some x -> dict.[name] <- x.ToString()
+        | _ -> ()
+      let addIfB v dv name =
+        if v <> dv then
+          dict.[name] <- v.ToString().ToLowerInvariant()
+      addIf this.Shape defaultShape "shape"
+      dict |> dictToAttrList2
 
-        override this.ToString() =
-            (
-                sprintf "\"%O\" %O" this.Id this.NodeAttributes
-            ).Trim()
+    override this.ToString() =
+      (sprintf "\"%O\" %O" this.Id this.NodeAttributes).Trim()

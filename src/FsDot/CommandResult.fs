@@ -1,14 +1,13 @@
 ﻿namespace FsDot
 
 type ResultFormat =
-| Text
-| Binary
+  | Text
+  | Binary
 
-type BinaryContent = array<byte>
+type BinaryContent = byte[]
 type TextContent = string
 
 type CommandResult =
-| SuccessText of content:TextContent
-| SuccessBinary of content:BinaryContent
-| Failure of message:string
-
+  | SuccessText of content:TextContent
+  | SuccessBinary of content:BinaryContent
+  | Failure of message:string

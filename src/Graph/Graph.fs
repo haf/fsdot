@@ -55,24 +55,27 @@ module __ =
          sprintf "#%02x%02x%02x%02x" c.A c.R c.G c.B
 
 type Strictness =
-| Strict
-| NonStrict
-   override this.ToString() =
-      match this with
+  | Strict
+  | NonStrict
+with
+   override x.ToString() =
+      match x with
       | Strict -> "strict"
       | NonStrict -> ""
 
 type GraphKind =
-| Graph
-| Digraph
-   override this.ToString() =
-      (getUnionCaseName this).ToLowerInvariant()
+  | Graph
+  | Digraph
+with
+   override x.ToString() =
+      (getUnionCaseName x).ToLowerInvariant()
 
 // TODO Should it really be possible to add directed edges to graphs
 // and undirected edges to digraphs?
 type Directionality =
-| Directed
-| Undirected
+  | Directed
+  | Undirected
+with
    override this.ToString() =
       match this with
       | Directed -> "->"
@@ -109,9 +112,10 @@ type Statements(statements : Statement list) =
                      sprintf "  %O" statement |]))
 
 type AttributeStatementType =
-| GraphStatementType
-| NodeStatementType
-| EdgeStatementType
+  | GraphStatementType
+  | NodeStatementType
+  | EdgeStatementType
+with
    override this.ToString() =
       (getUnionCaseName this).ToLowerInvariant().Replace("statementtype", "")
 
@@ -135,24 +139,22 @@ type Attributes(statementType : AttributeStatementType, attributes : Attribute l
             (String.Join (";", [| for attribute in attributes -> attribute.ToString() |]))
 
 type GraphVizRect = 
-   {
-      llx : double
-      lly : double
-      urx : double
-      ury : double
-   }
-      override this.ToString() =
-         sprintf "%g,%g,%g,%g" this.llx this.lly this.urx this.ury
+  { llx : double
+    lly : double
+    urx : double
+    ury : double }
+with
+  override x.ToString() =
+    sprintf "%g,%g,%g,%g" x.llx x.lly x.urx x.ury
 
 type WeightedColor =
-   {
-      WColor : Color
-      Weight : float option
-   }
-      override this.ToString() =
-         sprintf "%s%s" 
-            (this.WColor |> colorToString) 
-            (match this.Weight with | Some w -> sprintf ";%g" w | None -> "")
+  { WColor : Color
+    Weight : float option }
+with
+  override x.ToString() =
+    sprintf "%s%s" 
+      (x.WColor |> colorToString) 
+      (match x.Weight with | Some w -> sprintf ";%g" w | None -> "")
 
 type WeightedColorList(colors : WeightedColor list) =
    let totalWeight items =
@@ -177,15 +179,16 @@ type WeightedColorList(colors : WeightedColor list) =
       String.Join(":", items)
 
 type FontColor(color : Color) =
-    member __.Color = color
-    override __.ToString() =
-        color |> colorToString
+  member __.Color = color
+  override __.ToString() =
+    color |> colorToString
 
 type GraphColor =
-| SingleColor of Color
-| ColorList of WeightedColorList
-   override this.ToString() =
-      match this with
+  | SingleColor of Color
+  | ColorList of WeightedColorList
+with
+   override x.ToString() =
+      match x with
       | SingleColor c -> c |> colorToString
       | ColorList cl -> cl.ToString()
 
@@ -194,7 +197,7 @@ type Dimension(n : int) =
       if n < 2 || n > 10 then
          raise (ArgumentOutOfRangeException("Dimension value must be between 2 and 10 inclusive"))
    member __.N = n
-   override this.ToString() =
+   override x.ToString() =
       n.ToString()
 
 type DirEdgeConstraints =
@@ -216,12 +219,13 @@ type Separation(h : double, w : double, additive : bool) =
          (if h = w then sprintf "%g" h else sprintf "%g,%g" h w)
 
 type FontNames =
-| Undefined
-| Svg
-| Ps
-| Gd
-   override this.ToString() =
-      (getUnionCaseName this).ToLowerInvariant()
+  | Undefined
+  | Svg
+  | Ps
+  | Gd
+with
+   override x.ToString() =
+      (getUnionCaseName x).ToLowerInvariant()
 
 type FontSize(points : double) =
    do
@@ -241,33 +245,36 @@ type ImagePath(elements : string[]) =
       String.Join(sep, this.Elements)
 
 type LabelScheme =
-| NoScheme
-| PenaltyCenter
-| PenaltyCenterOld
-| TwoStep
-   override this.ToString() =
-      match this with
+  | NoScheme
+  | PenaltyCenter
+  | PenaltyCenterOld
+  | TwoStep
+with
+   override x.ToString() =
+      match x with
       | NoScheme -> "0"
       | PenaltyCenter -> "1"
       | PenaltyCenterOld -> "2"
       | TwoStep -> "3"
 
 type LabelJust =
-| Center
-| Right
-| Left
-   override this.ToString() =
-      match this with
+  | Center
+  | Right
+  | Left
+with
+   override x.ToString() =
+      match x with
       | Center -> "c"
       | Right -> "r"
       | Left -> "l"
 
 type LabelLoc =
-| Top
-| Center
-| Bottom
-   override this.ToString() =
-      match this with
+  | Top
+  | Center
+  | Bottom
+with
+   override x.ToString() =
+      match x with
       | Top -> "t"
       | Center -> "c"
       | Bottom -> "b"
@@ -314,24 +321,26 @@ type Margin(x : float, y : float) =
          sprintf "%g,%g" x y
 
 type Mode =
-| Major
-| KK
-| Hier
-| IpSep
-| Spring
-| MaxEnt
-   override this.ToString() =
-      match this with
+  | Major
+  | KK
+  | Hier
+  | IpSep
+  | Spring
+  | MaxEnt
+with
+   override x.ToString() =
+      match x with
       | KK -> "KK"
-      | _ -> (getUnionCaseName this).ToLowerInvariant()
+      | _ -> (getUnionCaseName x).ToLowerInvariant()
 
 type Model =
-| ShortPath
-| Circuit
-| Subset
-| Mds
-   override this.ToString() = 
-      (getUnionCaseName this).ToLowerInvariant()
+  | ShortPath
+  | Circuit
+  | Subset
+  | Mds
+with
+   override x.ToString() = 
+      (getUnionCaseName x).ToLowerInvariant()
 
 type NodeSep(inches : double) =
    do
@@ -342,105 +351,113 @@ type NodeSep(inches : double) =
       sprintf "%g" inches
 
 type Normalize =
-| Bool of bool
-| Degrees of float
+  | Bool of bool
+  | Degrees of float
+with
    override this.ToString() =
       match this with
       | Bool b -> b.ToString().ToLowerInvariant()
       | Degrees d -> sprintf "%g" d
 
 type Ordering =
-| Out
-| In
-   override this.ToString() =
-      (getUnionCaseName this).ToLowerInvariant()
+  | Out
+  | In
+with
+   override x.ToString() =
+      (getUnionCaseName x).ToLowerInvariant()
 
 type OutputOrder =
-| BreadthFirst
-| NodesFirst
-| EdgesFirst
-   override this.ToString() =
-      (getUnionCaseName this).ToLowerInvariant()
+  | BreadthFirst
+  | NodesFirst
+  | EdgesFirst
+with
+   override x.ToString() =
+      (getUnionCaseName x).ToLowerInvariant()
 
 type Overlap =
-| True  
-| False  
-| OverlapScale // Renamed
-| Prism  
-| PrismN of suffix:int  
-| Voronoi  
-| ScaleXY  
-| Compress  
-| Vpsc  
-| Ortho  
-| OrthoXY  
-| OrthoYX  
-| Ortho_YX  
-| POrtho  
-| POrthoXY  
-| POrthoYX  
-| POrtho_YX  
-| IpSep  
-   member this.ToString(prefix : int) =
+  | True
+  | False
+  | OverlapScale // Renamed
+  | Prism
+  | PrismN of suffix:int
+  | Voronoi
+  | ScaleXY
+  | Compress
+  | Vpsc
+  | Ortho
+  | OrthoXY
+  | OrthoYX
+  | Ortho_YX
+  | POrtho
+  | POrthoXY
+  | POrthoYX
+  | POrtho_YX
+  | IpSep
+with
+   member x.ToString(prefix : int) =
       let s = 
-         match this with
+         match x with
          | PrismN n -> sprintf "prism%i" n
          | OverlapScale -> sprintf "scale"
-         | _ -> (getUnionCaseName this).ToLowerInvariant()
+         | _ -> (getUnionCaseName x).ToLowerInvariant()
       if prefix > 0 then
          sprintf "%i:%s" prefix s
       else
          s
 
 type Pack =
-| True of margin:int option
-| False
-   override this.ToString() =
-      match this with
+  | True of margin:int option
+  | False
+with
+   override x.ToString() =
+      match x with
       | True(Some m) -> sprintf "%i" m
       | True(None) -> sprintf "true"
       | False -> sprintf "false"
 
 type PackModeOrdering =
-| Default
-| ColumnMajor
-| ColumnMajorN of int
-   override this.ToString() =
-      match this with
+  | Default
+  | ColumnMajor
+  | ColumnMajorN of int
+with
+   override x.ToString() =
+      match x with
       | Default -> ""
       | ColumnMajor -> "c"
       | ColumnMajorN n -> sprintf "c%i" n
 
 type PackModeAlignment =
-| Default
-| Top 
-| Bottom
-| Left
-| Right
-   override this.ToString() =
-      match this with
+  | Default
+  | Top
+  | Bottom
+  | Left
+  | Right
+   override x.ToString() =
+      match x with
       | Default -> ""
-      | _ -> (getUnionCaseName this).ToLowerInvariant().[0].ToString()
+      | _ -> (getUnionCaseName x).ToLowerInvariant().[0].ToString()
 
 type PackModeInsertionOrder =
-| Default
-| User
-   override this.ToString() =
-      match this with
+  | Default
+  | User
+with
+   override x.ToString() =
+      match x with
       | Default -> ""
-      | _ -> (getUnionCaseName this).ToLowerInvariant().[0].ToString()
+      | _ -> (getUnionCaseName x).ToLowerInvariant().[0].ToString()
 
 type PackMode =
-| Node
-| Clust
-| Graph
-| Array of ordering:PackModeOrdering * alignment:PackModeAlignment * insertionOrder:PackModeInsertionOrder
-   override this.ToString() =
-      match this with
+  | Node
+  | Clust
+  | Graph
+  | Array of ordering:PackModeOrdering * alignment:PackModeAlignment * insertionOrder:PackModeInsertionOrder
+with
+   override x.ToString() =
+      match x with
       | Array(ordering, alignment, insertionOrder) ->
          let flags = sprintf "%s%s%s" (ordering.ToString()) (alignment.ToString()) (insertionOrder.ToString())
          if flags.Length > 0 then sprintf "array_%s" flags else "array"
-      | _ -> (getUnionCaseName this).ToLowerInvariant()
+      | _ -> (getUnionCaseName x).ToLowerInvariant()
 
 type Pad(x : float, y : float) =
    new (n : float) =
@@ -461,27 +478,29 @@ type Page(x : float, y : float) =
          sprintf "%g,%g" x y
 
 type PageDir =
-| BottomLeft
-| BottomRight
-| TopLeft
-| TopRight
-| RightBottom
-| RightTop
-| LeftBottom
-| LeftTop
-   override this.ToString() =
-      this
-      |> getUnionCaseName
-      |> initials
+  | BottomLeft
+  | BottomRight
+  | TopLeft
+  | TopRight
+  | RightBottom
+  | RightTop
+  | LeftBottom
+  | LeftTop
+with
+  override x.ToString() =
+    x
+    |> getUnionCaseName
+    |> initials
 
 
 type Quadtree =
-| Normal
-| Fast
-| None_ 
-   override this.ToString() =
-      match this with
-      | Normal | Fast -> (getUnionCaseName this).ToLowerInvariant()
+  | Normal
+  | Fast
+  | None_
+with
+   override x.ToString() =
+      match x with
+      | Normal | Fast -> (getUnionCaseName x).ToLowerInvariant()
       | None_ -> "none"
 
 type RankDir =
@@ -512,15 +531,16 @@ type RankSep =
         | Equally f -> sprintf "%g equally" f
 
 type Ratio =
-| Numeric of float
-| Fill
-| Compress
-| Expand
-| Auto
-    override this.ToString() =
-        match this with
-        | Numeric f -> f.ToString()
-        | _ -> (getUnionCaseName this).ToLowerInvariant()
+  | Numeric of float
+  | Fill
+  | Compress
+  | Expand
+  | Auto
+with
+  override x.ToString() =
+    match x with
+    | Numeric f -> f.ToString()
+    | _ -> (getUnionCaseName x).ToLowerInvariant()
 
 type Rotate =
 | Portrait
@@ -536,12 +556,13 @@ type Scale(x : float, y : float) =
          sprintf "%g,%g" x y
          
 type Sep =
-| SepAdd of float
-| SepAddHW of float * float
-| SepScale of float
-| SepScaleHW of float * float
-   override this.ToString() =
-      match this with
+  | SepAdd of float
+  | SepAddHW of float * float
+  | SepScale of float
+  | SepScaleHW of float * float
+with
+   override x.ToString() =
+      match x with
       | SepAdd x -> 
          sprintf "+%g" x
       | SepAddHW (h,w) ->
@@ -558,36 +579,39 @@ type Sep =
             sprintf "%g,%g" h w
 
 type ShowBoxes =
-| Off
-| Beginning
-| End
-   override this.ToString() =
-      match this with
-      | Off -> "0"
-      | Beginning -> "1"
-      | End -> "2"  
+  | Off
+  | Beginning
+  | End
+with
+  override x.ToString() =
+    match x with
+    | Off -> "0"
+    | Beginning -> "1"
+    | End -> "2"  
 
 type Size =
-| Max of float
-| MaxHW of float * float
-| Desired of float
-| DesiredHW of float * float
-   override this.ToString() =
-      match this with
-      | Max n -> sprintf "%g" n
-      | MaxHW(h, w) -> sprintf "%g,%g" h w
-      | Desired n -> sprintf "%g!" n
-      | DesiredHW(h, w) -> sprintf "%g,%g!" h w
+  | Max of float
+  | MaxHW of float * float
+  | Desired of float
+  | DesiredHW of float * float
+with
+  override x.ToString() =
+    match x with
+    | Max n -> sprintf "%g" n
+    | MaxHW(h, w) -> sprintf "%g,%g" h w
+    | Desired n -> sprintf "%g!" n
+    | DesiredHW(h, w) -> sprintf "%g,%g!" h w
 
 type Smoothing =
-| AverageDistance
-| GraphDistance
-| PowerDistance
-| Random
-| Spring
-| Triangle
-   override this.ToString() =
-      match this with
+  | AverageDistance
+  | GraphDistance
+  | PowerDistance
+  | Random
+  | Spring
+  | Triangle
+with
+   override x.ToString() =
+      match x with
       | AverageDistance -> "avg_dist"
       | GraphDistance -> "graph_dist"
       | PowerDistance -> "power_dist"
@@ -596,17 +620,18 @@ type Smoothing =
       | Triangle -> "triangle"
 
 type Splines =
-| Curved
-| Compound
-| Line
-| NoEdges
-| Ortho
-| PolyLine
-| Spline
-   override this.ToString() =
-      match this with
+  | Curved
+  | Compound
+  | Line
+  | NoEdges
+  | Ortho
+  | PolyLine
+  | Spline
+with
+   override x.ToString() =
+      match x with
       | NoEdges -> "none"
-      | _ -> (getUnionCaseName this).ToLowerInvariant()
+      | _ -> (getUnionCaseName x).ToLowerInvariant()
 
 type Graph
    (

@@ -64,4 +64,4 @@ module Invocation =
          let paramString = sprintf "-T%s" outputTypeParam
          // put it on your path rather than hard-coding the location, or let
          // the software running this library put it on the path
-         startProcessAndCaptureOutput commandName paramString (outputType.ResultFormat()) dotContent
+         startProcessAndCaptureOutput commandName paramString outputType.resultFormat dotContent

@@ -4,8 +4,7 @@ namespace FsDot
 #endif
 
 type Id =
-| Id of string
-   override this.ToString() =
-      match this with
-      | Id s -> s
-
+  Id of string
+with
+  override x.ToString() =
+    let (Id s) = x in s
