@@ -1,4 +1,4 @@
-﻿namespace GraphVizWrapper
+﻿namespace FsDot
 
 type OutputType =
 | Svg

@@ -7,3 +7,4 @@ NUGET
       NUnit (2.6.4)
     NuGet.CommandLine (3.3.0)
     NUnit (2.6.4)
+    NUnit.Runners (2.6.4)

@@ -1,13 +1,10 @@
-﻿namespace GraphVizWrapper
+﻿namespace FsDot
 
 open System
 open System.IO
 open Microsoft.FSharp.Reflection
 
 module Invocation =
-
-   // TODO make configurable
-   let private graphVizPath = @"C:\Program Files (x86)\Graphviz2.38\bin\"
 
    let private getUnionCaseName (x:'a) = 
        match FSharpValue.GetUnionFields(x, typeof<'a>) with
@@ -63,7 +60,8 @@ module Invocation =
          CommandResult.Failure "Empty input"
       else
          let commandName = (getUnionCaseName algo).ToLowerInvariant()
-         let commandPath = Path.ChangeExtension(Path.Combine(graphVizPath, commandName), ".exe")
          let outputTypeParam = (getUnionCaseName outputType).ToLowerInvariant()
          let paramString = sprintf "-T%s" outputTypeParam
-         startProcessAndCaptureOutput commandPath paramString (outputType.ResultFormat()) dotContent
+         // put it on your path rather than hard-coding the location, or let
+         // the software running this library put it on the path
+         startProcessAndCaptureOutput commandName paramString (outputType.ResultFormat()) dotContent

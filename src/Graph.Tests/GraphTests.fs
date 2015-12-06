@@ -1,9 +1,9 @@
-﻿module GraphTests
+﻿namespace Graph.Tests
 
 open System.Drawing
 open NUnit.Framework
 open FsUnit
-open GraphVizWrapper
+open FsDot
 
 // TODO
 // Graph 'start' attribute is missing

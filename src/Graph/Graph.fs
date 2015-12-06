@@ -1,6 +1,6 @@
 ﻿#if INTERACTIVE
 #else
-namespace GraphVizWrapper
+namespace FsDot
 #endif
 
 open System

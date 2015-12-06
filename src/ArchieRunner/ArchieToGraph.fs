@@ -2,14 +2,14 @@
 
 open System.IO
 open Archie
-open GraphVizWrapper
+open FsDot
 
 let ComponentKindToShape = function
-| Client -> GraphNode.Shape.Oval
-| Store -> GraphNode.Shape.Folder
-| Processor -> GraphNode.Shape.Box 
-| UserInterface -> GraphNode.Shape.MSquare
-| Queue -> GraphNode.Shape.Cds
+  | Client -> GraphNode.Shape.Oval
+  | Store -> GraphNode.Shape.Folder
+  | Processor -> GraphNode.Shape.Box 
+  | UserInterface -> GraphNode.Shape.MSquare
+  | Queue -> GraphNode.Shape.Cds
 
 let ArchitectureToGraph (architecture : Architecture) : CommandResult =
 
@@ -50,7 +50,7 @@ let ArchitectureToGraph (architecture : Architecture) : CommandResult =
     //graph.FontName <- "ARIALUNI.TTF"
     //graph.BgColor <- GraphColor.SingleColor(System.Drawing.Color.AliceBlue) |> Some
     let temp = graph.ToString()
-    GraphVizWrapper.Invocation.Call(Algo.Dot, OutputType.Png, graph.ToString())
+    Invocation.Call(Algo.Dot, OutputType.Png, graph.ToString())
 
 let MakeTempFile extension = 
     let tempFileName = Path.GetTempFileName()

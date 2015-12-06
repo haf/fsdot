@@ -1,7 +1,7 @@
 require 'bundler/setup'
 
 require 'albacore'
-# require 'albacore/tasks/release'
+require 'albacore/tasks/release'
 require 'albacore/tasks/versionizer'
 require 'albacore/ext/teamcity'
 
@@ -11,9 +11,9 @@ Albacore::Tasks::Versionizer.new :versioning
 
 desc 'create assembly infos'
 asmver_files :assembly_info do |a|
-  a.files = FileList['**/*proj'] # optional, will find all projects recursively by default
+  a.files = FileList['src/**/*.fsproj'] # optional, will find all projects recursively by default
 
-  a.attributes assembly_description: 'TODO',
+  a.attributes assembly_description: 'An F# wrapper for GraphViz',
                assembly_configuration: Configuration,
                assembly_company: 'Foretag AB',
                assembly_copyright: "(c) 2015 by John Doe",
@@ -26,7 +26,7 @@ desc 'Perform fast build (warn: doesn\'t d/l deps)'
 build :quick_compile do |b|
   b.prop 'Configuration', Configuration
   b.logging = 'detailed'
-  b.sln     = 'GraphVizWrapper.sln'
+  b.sln     = 'src/FsDot.sln'
 end
 
 task :paket_bootstrap do
@@ -41,7 +41,7 @@ end
 desc 'Perform full build'
 build :compile => [:versioning, :restore, :assembly_info] do |b|
   b.prop 'Configuration', Configuration
-  b.sln = 'GraphVizWrapper.sln'
+  b.sln = 'src/FsDot.sln'
 end
 
 directory 'build/pkg'
@@ -65,9 +65,19 @@ nugets_pack :create_nugets => ['build/pkg', :versioning, :compile] do |p|
 end
 
 namespace :tests do
-  task :unit do
-    system "src/MyProj.Tests/bin/#{Configuration}/MyProj.Tests.exe", clr_command: true
+  task :wrapper do
+    system 'packages/NUnit.Runners/tools/nunit-console.exe',
+           "src/GraphVizWrapperTests/bin/#{Configuration}/GraphVizWrapperTests.dll",
+           clr_command: true
   end
+
+  task :graph do
+    system 'packages/NUnit.Runners/tools/nunit-console.exe',
+           "src/GraphTests/bin/#{Configuration}/GraphTests.dll",
+           clr_command: true
+  end
+
+  task :unit => %i|wrapper graph|
 end
 
 task :tests => :'tests:unit'

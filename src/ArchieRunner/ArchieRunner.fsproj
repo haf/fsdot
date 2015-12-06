@@ -1,22 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>6cc8939c-586f-46af-b273-d43e94ef26f9</ProjectGuid>
+    <ProjectGuid>{6CC8939C-586F-46AF-B273-D43E94EF26F9}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>ArchieRunner</RootNamespace>
     <AssemblyName>ArchieRunner</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <TargetFSharpCoreVersion>4.3.1.0</TargetFSharpCoreVersion>
     <Name>ArchieRunner</Name>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <Tailcalls>false</Tailcalls>
     <OutputPath>bin\Debug\</OutputPath>
@@ -36,18 +34,17 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DocumentationFile>bin\Release\ArchieRunner.XML</DocumentationFile>
     <Prefer32Bit>true</Prefer32Bit>
+    <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="mscorlib" />
-    <Reference Include="FSharp.Core, Version=$(TargetFSharpCoreVersion), Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Numerics" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AssemblyVersionInfo.fs" />
     <Compile Include="ResourceManager.fs" />
     <Compile Include="ResourceManager2.fs" />
     <Compile Include="ArchieToGraph.fs" />
@@ -56,19 +53,16 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Archie\Archie.fsproj">
-      <Name>Archie (Demos\Archie\Archie)</Name>
-      <Project>{c4840674-cf9d-4fc9-b96a-295aabf91b24}</Project>
-      <Private>True</Private>
+      <Name>Archie</Name>
+      <Project>{C4840674-CF9D-4FC9-B96A-295AABF91B24}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\GraphVizWrapper\GraphVizWrapper.fsproj">
-      <Name>GraphVizWrapper</Name>
-      <Project>{bb5a2022-3217-4e37-928e-f3ac930b45b3}</Project>
-      <Private>True</Private>
+    <ProjectReference Include="..\FsDot\FsDot.fsproj">
+      <Name>FsDot</Name>
+      <Project>{BB5A2022-3217-4E37-928E-F3AC930B45B3}</Project>
     </ProjectReference>
     <ProjectReference Include="..\Graph\Graph.fsproj">
       <Name>Graph</Name>
-      <Project>{61b08167-c76a-4c9e-b4eb-0ed06ecab744}</Project>
-      <Private>True</Private>
+      <Project>{61B08167-C76A-4C9E-B4EB-0ED06ECAB744}</Project>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
