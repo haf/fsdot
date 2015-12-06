@@ -20,6 +20,20 @@ asmver_files :assembly_info do |a|
                assembly_version: ENV['LONG_VERSION'],
                assembly_file_version: ENV['LONG_VERSION'],
                assembly_informational_version: ENV['BUILD_VERSION']
+
+  a.handle_config do |proj, conf|
+    conf.namespace = conf.namespace + "AsmVer"
+
+    conf.change_attributes do |attrs|
+      attrs[:assembly_description] = {
+        'FsDot.Graph' => 'This assembly deals with the Object Model for creating graphs',
+        'FsDot' => 'This is a an assembly to handle the core stuff'
+      }[attrs[:assembly_title]]
+    end
+
+    # you MUST return the new Config instance to use
+    conf
+  end
 end
 
 desc 'Perform fast build (warn: doesn\'t d/l deps)'
@@ -56,10 +70,10 @@ nugets_pack :create_nugets => ['build/pkg', :versioning, :compile] do |p|
   p.with_metadata do |m|
     # m.id          = 'MyProj'
     m.title       = 'FsDot'
-    m.description = 'A '
-    m.authors     = 'John Doe, Foretag AB'
-    m.project_url = 'http://example.com'
-    m.tags        = ''
+    m.description = Description
+    m.authors     = 'misterspeedy'
+    m.project_url = 'https://github.com/haf/fsdot'
+    m.tags        = 'fsharp graphviz fsdot plotting'
     m.version     = ENV['NUGET_VERSION']
   end
 end

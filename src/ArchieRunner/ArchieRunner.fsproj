@@ -60,8 +60,8 @@
       <Name>FsDot</Name>
       <Project>{BB5A2022-3217-4E37-928E-F3AC930B45B3}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\Graph\Graph.fsproj">
-      <Name>Graph</Name>
+    <ProjectReference Include="..\FsDot.Graph\FsDot.Graph.fsproj">
+      <Name>FsDot.Graph</Name>
       <Project>{61B08167-C76A-4C9E-B4EB-0ED06ECAB744}</Project>
     </ProjectReference>
   </ItemGroup>

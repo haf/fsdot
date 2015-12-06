@@ -1,4 +1,4 @@
-﻿namespace Graph.Tests
+﻿namespace FsDot.Graph.Tests
 
 open System.Drawing
 open NUnit.Framework
