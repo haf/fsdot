@@ -23,15 +23,6 @@ asmver_files :assembly_info do |a|
 
   a.handle_config do |proj, conf|
     conf.namespace = conf.namespace + "AsmVer"
-
-    conf.change_attributes do |attrs|
-      attrs[:assembly_description] = {
-        'FsDot.Graph' => 'This assembly deals with the Object Model for creating graphs',
-        'FsDot' => 'This is a an assembly to handle the core stuff'
-      }[attrs[:assembly_title]]
-    end
-
-    # you MUST return the new Config instance to use
     conf
   end
 end
