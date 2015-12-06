@@ -39,7 +39,7 @@
     <Reference Include="System.Numerics" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AssemblyVersionInfo.fs" />
+    <Compile Include="AssemblyVersionInfo.fs" Conditiion=" Exists('AssemblyVersionInfo.fs') " />
     <Compile Include="GraphTests.fs" />
     <None Include="paket.references" />
     <None Include="app.config" />

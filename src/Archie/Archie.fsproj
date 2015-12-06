@@ -38,7 +38,7 @@
     <Reference Include="System.Numerics" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AssemblyVersionInfo.fs" />
+    <Compile Include="AssemblyVersionInfo.fs" Condition=" Exists('AssemblyVersionInfo.fs') " />
     <Compile Include="Domain.fs" />
     <None Include="Domain.fsx" />
   </ItemGroup>
@@ -58,13 +58,6 @@
     </Otherwise>
   </Choose>
   <Import Project="$(FSharpTargetsPath)" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
   <ItemGroup>
     <ProjectReference Include="..\FsDot\FsDot.fsproj">
       <Project>{BB5A2022-3217-4E37-928E-F3AC930B45B3}</Project>

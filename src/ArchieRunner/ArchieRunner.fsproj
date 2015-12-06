@@ -44,7 +44,7 @@
     <Reference Include="System.Numerics" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AssemblyVersionInfo.fs" />
+    <Compile Include="AssemblyVersionInfo.fs" Condition=" Exists('AssemblyVersionInfo.fs') " />
     <Compile Include="ResourceManager.fs" />
     <Compile Include="ResourceManager2.fs" />
     <Compile Include="ArchieToGraph.fs" />
@@ -81,11 +81,4 @@
     </Otherwise>
   </Choose>
   <Import Project="$(FSharpTargetsPath)" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>
