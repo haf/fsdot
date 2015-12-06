@@ -157,3 +157,4 @@ $RECYCLE.BIN/
 *.exe
 *.userprefs
 TestResult.xml
+AssemblyVersionInfo.fs

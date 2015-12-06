@@ -1,0 +1,9 @@
+language: csharp
+solution: ./src/FsDot.sln
+
+install:
+  - mono tools/paket.exe restore
+
+script:
+  - xbuild /verbosity:minimal /property:Configuration=Release src/FsDot.sln
+  - mono packages/NUnit.Runners/tools/nunit-console.exe src/FsDot.Tests/bin/Release/FsDot.Tests.dll

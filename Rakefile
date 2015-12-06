@@ -6,6 +6,7 @@ require 'albacore/tasks/versionizer'
 require 'albacore/ext/teamcity'
 
 Configuration = ENV['CONFIGURATION'] || 'Release'
+Description = 'An F# wrapper for GraphViz'
 
 Albacore::Tasks::Versionizer.new :versioning
 
@@ -13,10 +14,9 @@ desc 'create assembly infos'
 asmver_files :assembly_info do |a|
   a.files = FileList['src/**/*.fsproj'] # optional, will find all projects recursively by default
 
-  a.attributes assembly_description: 'An F# wrapper for GraphViz',
+  a.attributes assembly_description: Description,
                assembly_configuration: Configuration,
-               assembly_company: 'Foretag AB',
-               assembly_copyright: "(c) 2015 by John Doe",
+               assembly_copyright: "(c) 2015 by github.com/misterspeedy",
                assembly_version: ENV['LONG_VERSION'],
                assembly_file_version: ENV['LONG_VERSION'],
                assembly_informational_version: ENV['BUILD_VERSION']
@@ -55,8 +55,8 @@ nugets_pack :create_nugets => ['build/pkg', :versioning, :compile] do |p|
   p.exe     = 'packages/NuGet.CommandLine/tools/NuGet.exe'
   p.with_metadata do |m|
     # m.id          = 'MyProj'
-    m.title       = 'TODO'
-    m.description = 'TODO'
+    m.title       = 'FsDot'
+    m.description = 'A '
     m.authors     = 'John Doe, Foretag AB'
     m.project_url = 'http://example.com'
     m.tags        = ''
@@ -65,19 +65,19 @@ nugets_pack :create_nugets => ['build/pkg', :versioning, :compile] do |p|
 end
 
 namespace :tests do
-  task :wrapper do
+  task :fsdot do
     system 'packages/NUnit.Runners/tools/nunit-console.exe',
-           "src/GraphVizWrapperTests/bin/#{Configuration}/GraphVizWrapperTests.dll",
+           "src/FsDot.Tests/bin/#{Configuration}/FsDot.Tests.dll",
            clr_command: true
   end
 
   task :graph do
     system 'packages/NUnit.Runners/tools/nunit-console.exe',
-           "src/GraphTests/bin/#{Configuration}/GraphTests.dll",
+           "src/Graph.Tests/bin/#{Configuration}/Graph.Tests.dll",
            clr_command: true
   end
 
-  task :unit => %i|wrapper graph|
+  task :unit => %i|fsdot graph|
 end
 
 task :tests => :'tests:unit'
