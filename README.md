@@ -1,5 +1,7 @@
 # FsDot
 
+## Maintainers wanted – ping @haf to talk
+
 This is a F# wrapper for GraphViz. Works on Windows, Linux and OS X. You have to
 have GraphViz available on your path.
 
